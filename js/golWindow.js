@@ -13,6 +13,9 @@ var createGrid = function(container, grid){
 			container.append($cell);
 		}
 	}
+	
+	var $startButton = $( "<div class = 'btn'><button class = 'start-button'>Start</button></div>" );
+	$startButton.insertAfter(".container");
 }
 
 function toggleCellView(grid,row, column){
