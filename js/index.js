@@ -6,4 +6,8 @@ grid.init();
 $(document).ready(function(){
 	var container = $('#container');
 	createGrid(container, grid);
+	setInterval(function(){
+		updateGrid(grid);
+		updateGridView(container, grid);
+	}, 3000);
 });

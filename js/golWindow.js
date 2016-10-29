@@ -6,13 +6,16 @@ var createGrid = function(container, grid){
 			var divid = "row"+i+"column"+j;
 			var $cell = $( "<div class='cell'></div>" ).attr("id", divid).attr("data-row",i).attr("data-column",j);
 			$cell.css( { left: j*$(".cell").width(), top: i*$(".cell").height() } );
-			$cell.click(updateCell(grid, i, j));
+			if(grid.getCells()[i][j] == "alive"){
+				$cell.addClass("alive");
+			}
+			$cell.click(toggleCellView(grid, i, j));
 			container.append($cell);
 		}
 	}
 }
 
-function updateCell(grid,row, column){
+function toggleCellView(grid,row, column){
 	return function(){
 		var divid = "#row"+row+"column"+column;
 		if(grid.getCells()[row][column] == "dead"){
@@ -21,6 +24,20 @@ function updateCell(grid,row, column){
 		}else{
 			grid.getCells()[row][column] = "dead";
 			$(divid).removeClass("alive");
+		}
+	}
+}
+
+function updateGridView(container, grid){
+	for(var i = 0; i< grid.getCells().length; i++){
+		for(var j=0; j< grid.getCells()[i].length; j++){
+			var divId = "row"+i+"column"+j;
+			var $cell = $("#"+divId);
+			if(grid.getCells()[i][j] == "alive"){
+				$cell.addClass("alive");
+			}else{
+				$cell.removeClass("alive");
+			}
 		}
 	}
 }
